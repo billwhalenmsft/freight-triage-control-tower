@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Freight Triage Control Tower — Prototype for TE Connectivity</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><rect x='2' y='2' width='40' height='40' rx='9' fill='%23FF6600'/><text x='22' y='30' font-family='Segoe UI,sans-serif' font-size='20' font-weight='800' fill='white' text-anchor='middle'>TE</text></svg>" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2e; --navy2: #14233a; --ink: #1a1a2e; --muted: #5b6473;
+    --bg: #f5f7fb; --card: #fff; --border: #e2e7f0;
+    --te: #ff6600; --te-dark: #e25608; --ms-blue: #0078d4; --ms-blue-dark: #005a9e;
+    --shadow: 0 10px 30px rgba(13,27,46,.08);
+    --radius: 14px;
+  }
+  body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--ms-blue); text-decoration: none; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--navy) 100%); color: #fff; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 75% 35%, rgba(255,102,0,.16) 0%, transparent 70%); }
+  .hero-inner { position: relative; padding: 30px 0 44px; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+  .ms-logo { display: flex; gap: 3px; }
+  .ms-sq { width: 13px; height: 13px; border-radius: 1px; }
+  .r{background:#f25022;} .g{background:#7fba00;} .b{background:#00a4ef;} .y{background:#ffb900;}
+  .eyebrow-text { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  .divider { width: 1px; height: 14px; background: rgba(255,255,255,.25); }
+  .te-chip { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,102,0,.16); border: 1px solid rgba(255,102,0,.4); color: #ffb98a; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; }
+  .te-mark { width: 18px; height: 18px; border-radius: 4px; background: var(--te); color:#fff; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+  h1 { font-size: 34px; font-weight: 700; line-height: 1.15; margin-bottom: 12px; max-width: 760px; }
+  h1 em { font-style: normal; color: #ff9a52; }
+  .lede { font-size: 16px; color: rgba(255,255,255,.78); max-width: 680px; }
+  .prepared { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.6); }
+
+  /* START HERE */
+  .section { padding: 40px 0; }
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--te-dark); margin-bottom: 6px; }
+  .section-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .section-desc { color: var(--muted); margin-bottom: 20px; max-width: 680px; }
+  .video-frame { background: #000; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+  .video-frame video { width: 100%; display: block; }
+  .video-missing { background: linear-gradient(135deg, var(--navy), var(--navy2)); color: #fff; border-radius: var(--radius); padding: 44px 32px; text-align: center; box-shadow: var(--shadow); }
+  .video-missing .play { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); display: inline-flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 14px; }
+  .video-missing h3 { font-size: 18px; margin-bottom: 6px; }
+  .video-missing p { color: rgba(255,255,255,.7); font-size: 14px; max-width: 460px; margin: 0 auto 18px; }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(13,27,46,.12); }
+  .card-icon { font-size: 28px; margin-bottom: 12px; }
+  .card h3 { font-size: 17px; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: 14px; flex: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 9px; cursor: pointer; }
+  .btn-primary { background: var(--ms-blue); color: #fff; }
+  .btn-primary:hover { background: var(--ms-blue-dark); }
+  .btn-te { background: var(--te); color: #fff; }
+  .btn-te:hover { background: var(--te-dark); }
+  .btn-ghost { background: #eef2f8; color: var(--ink); border: 1px solid var(--border); }
+
+  /* ABOUT */
+  .about { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow); }
+  .about ul { margin: 12px 0 0 20px; color: var(--muted); }
+  .about li { margin: 6px 0; }
+  .about strong { color: var(--ink); }
+
+  /* FEEDBACK */
+  .feedback { background: linear-gradient(135deg, var(--navy), var(--navy2)); color: #fff; border-radius: var(--radius); padding: 30px 34px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .feedback h3 { font-size: 20px; margin-bottom: 6px; }
+  .feedback p { color: rgba(255,255,255,.7); font-size: 14px; max-width: 520px; }
+
+  /* FOOTER */
+  footer { padding: 26px 0 40px; color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--border); margin-top: 36px; }
+  .foot-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .confidential { font-size: 11.5px; color: #98a2b3; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">
+      <div class="ms-logo"><div class="ms-sq r"></div><div class="ms-sq g"></div><div class="ms-sq b"></div><div class="ms-sq y"></div></div>
+      <span class="eyebrow-text">Microsoft · Solution Engineering</span>
+      <span class="divider"></span>
+      <span class="te-chip"><span class="te-mark">TE</span> Prepared for TE Connectivity</span>
+    </div>
+    <h1>Freight Triage Control Tower <em>— a working prototype</em></h1>
+    <p class="lede">One surface for the operations team to <strong>Queue → Assign → Resolve</strong> post-booking freight emails — review the email thread on each item, and track ageing + SLA. Try it, download it, and tell us what to change.</p>
+    <div class="prepared">Prepared for TE Connectivity by the Microsoft Solution Engineering team.</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- START HERE: VIDEO -->
+  <section class="section" id="watch">
+    <div class="section-label">Start here</div>
+    <div class="section-title">A 2-minute walkthrough</div>
+    <div class="section-desc">See the control tower, the inbox, and the email-on-item review end to end. Prefer to dive in? Jump straight to the live prototype below.</div>
+    <div id="videoSlot" class="video-frame">
+      <video controls playsinline poster="" preload="metadata">
+        <source src="video/walkthrough.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </section>
+
+  <!-- EXPLORE -->
+  <section class="section" id="explore">
+    <div class="section-label">Explore</div>
+    <div class="section-title">Try it &amp; take it with you</div>
+    <div class="section-desc">The prototype runs on sample data — no sign-in needed. Anything you assign or resolve is remembered in your browser.</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>Try the prototype</h3>
+        <p>Open the interactive app. Move items through Queue → Assign → Resolve, browse the inbox, and open an item to read its email thread.</p>
+        <a class="btn btn-te" href="prototype/index.html" target="_blank" rel="noopener">Open the prototype →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">⬇️</div>
+        <h3>Download the project</h3>
+        <p>The source code to run it yourself: <code>npm install</code> then <code>npm run dev</code>. Built as a Power Apps Code App (React + TypeScript).</p>
+        <a class="btn btn-primary" href="te-freight-triage-control-tower-project.zip" download>Download .zip →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <h3>What it does</h3>
+        <p>The four screens, the SLA model, and how it connects to your existing email-intelligence flows — in plain terms.</p>
+        <a class="btn btn-ghost" href="#about">Read the overview →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-label">Overview</div>
+    <div class="section-title">What you're looking at</div>
+    <div class="about">
+      <p>The prototype layers a single <strong>control surface</strong> on top of your existing email-extraction and sentiment flows. Every flagged shipment email becomes a <strong>triage item</strong> the team owns and resolves against an SLA.</p>
+      <ul>
+        <li><strong>Control Tower</strong> — Queue / Assigned / Resolved lanes with priority + SLA badges. Assign an owner, resolve, reopen.</li>
+        <li><strong>Inbox</strong> — every inbound email, filter by carrier or mode, jump to the related triage item.</li>
+        <li><strong>Item detail</strong> — shipment identifiers (SH#, HBL / AWB / MBL), an SLA countdown, and the <strong>full email thread inline</strong>.</li>
+        <li><strong>Ageing &amp; SLA</strong> — open by ageing bucket, breaches by carrier and owner, resolved-within-SLA %, and mean time to resolve — no separate BI tool needed.</li>
+      </ul>
+      <p style="margin-top:14px;color:var(--muted);font-size:13.5px;">Triage state only — the prototype never writes back to booking systems and sends no automated email. Carriers, shipment numbers, and emails shown are fictional demo data.</p>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section class="section">
+    <div class="feedback">
+      <div>
+        <h3>What should change?</h3>
+        <p>This is a prototype to react to. Tell us what to add, cut, or rename — fields, screens, SLA targets, the lot. Reply to your Microsoft team or note it on our next call.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>Freight Triage Control Tower — prototype · Prepared for TE Connectivity by Microsoft Solution Engineering</span>
+      <span class="te-chip" style="color:#a8551f;background:rgba(255,102,0,.1);border-color:rgba(255,102,0,.3);"><span class="te-mark">TE</span> TE Connectivity</span>
+    </div>
+    <div class="confidential">Shared in confidence for evaluation. Not for redistribution. Demo data only — no production or customer data included.</div>
+  </div>
+</footer>
+
+<script>
+  // Gracefully handle the walkthrough video not being present yet.
+  (function () {
+    var slot = document.getElementById('videoSlot');
+    var video = slot.querySelector('video');
+    function showPlaceholder() {
+      slot.className = 'video-missing';
+      slot.innerHTML =
+        '<div class="play">▶</div>' +
+        '<h3>Walkthrough video coming shortly</h3>' +
+        '<p>We\'re adding a short recorded walkthrough here. In the meantime, the live prototype is one click away.</p>' +
+        '<a class="btn btn-te" href="prototype/index.html" target="_blank" rel="noopener" style="text-decoration:none;">Open the prototype →</a>';
+    }
+    video.addEventListener('error', showPlaceholder, true);
+    // If the source 404s, the video element fires error on the <source>; double-check after load.
+    window.addEventListener('load', function () {
+      if (!video.currentSrc) showPlaceholder();
+    });
+  })();
+</script>
+</body>
+</html>
