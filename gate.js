@@ -61,7 +61,7 @@
   function showPrompt(err) {
     wall(
       "<div style='display:flex;justify-content:center;margin-bottom:14px'>" +
-      "<div style='width:46px;height:46px;border-radius:11px;background:#ff6600;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center'>TE</div></div>" +
+      "<div style='width:46px;height:46px;border-radius:11px;background:#e98300;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center'>TE</div></div>" +
       "<h1 style='font-size:21px;margin:0 0 4px'>" + CFG.title + "</h1>" +
       "<p style='color:rgba(255,255,255,.6);margin:0 0 18px;font-size:13px'>" + CFG.subtitle + "</p>" +
       "<input id='seos-pw' type='password' autocomplete='off' placeholder='Password' " +
