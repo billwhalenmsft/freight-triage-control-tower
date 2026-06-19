@@ -131,7 +131,7 @@
       <div class="card">
         <div class="card-icon">📄</div>
         <h3>What it does</h3>
-        <p>The four screens, the SLA model, and how it connects to your existing email-intelligence flows — in plain terms.</p>
+        <p>The four screens, the SLA model, how it connects to your existing email-intelligence flows, and how it goes live on Dataverse — in plain terms.</p>
         <a class="btn btn-ghost" href="#about">Read the overview →</a>
       </div>
     </div>
@@ -149,6 +149,7 @@
         <li><strong>Item detail</strong> — shipment identifiers (SH#, HBL / AWB / MBL), an SLA countdown, and the <strong>full email thread inline</strong>.</li>
         <li><strong>Ageing &amp; SLA</strong> — open by ageing bucket, breaches by carrier and owner, resolved-within-SLA %, and mean time to resolve — no separate BI tool needed.</li>
       </ul>
+      <p style="margin-top:18px;"><strong>How it goes live.</strong> The prototype runs on sample data in your browser. The production build promotes these same screens onto <strong>Microsoft Dataverse</strong> as the system of record — each triage item and its email log as related tables, with role-based security, audit, and the ageing/SLA views built in. We looked at a SharePoint list and recommend Dataverse for the relational model, typed status/priority/SLA fields, and the security it gives you at scale. It stays a Power Apps Code App, with an optional Copilot Studio assistant over the same data for natural-language questions if you want one.</p>
       <p style="margin-top:14px;color:var(--muted);font-size:13.5px;">Triage state only — the prototype never writes back to booking systems and sends no automated email. Carriers, shipment numbers, and emails shown are fictional demo data.</p>
     </div>
   </section>
